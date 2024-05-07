@@ -1,0 +1,11 @@
+{
+  "name": "jsonresume-theme-vitae",
+  "version": "0.1.0",
+  "description": "Simple theme for JSON Resume",
+  "author": "kasperab",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kasperab/jsonresume-theme-vitae"
+  },
+  "license": "MIT"
+}
