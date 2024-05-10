@@ -5,7 +5,7 @@ function render(resume) {
 
 	if (resume.basics) {
 		if (resume.basics.image) {
-			body.push("<img src='" + resume.basics.image + "'>");
+			body.push("<img class='photo' src='" + resume.basics.image + "'>");
 		}
 		if (resume.basics.name) {
 			title.push(resume.basics.name);
@@ -387,27 +387,30 @@ const base = `<!DOCTYPE html>
 				padding: 16px;
 				font-family: Helvetica, sans-serif;
 				font-size: 16px;
-				color: #000000;
+				color: #444444;
 				background-color: #ffffff;
 			}
 			h1 {
 				font-size: 32px;
-				font-weight: bold;
+				font-weight: normal;
 				text-align: center;
 				text-decoration: none;
+				text-transform: uppercase;
 				margin-bottom: 8px;
 			}
 			h2 {
 				font-size: 24px;
-				font-weight: bold;
+				font-weight: normal;
 				text-align: center;
 				text-decoration: none;
+				text-transform: uppercase;
 			}
 			h3 {
 				font-size: 24px;
-				font-weight: bold;
+				font-weight: normal;
 				text-align: left;
 				text-decoration: none;
+				text-transform: uppercase;
 			}
 			ul {
 				padding-left: 24px;
@@ -425,7 +428,7 @@ const base = `<!DOCTYPE html>
 				text-align: inherit;
 				white-space: nowrap;
 			}
-			img {
+			.photo {
 				max-width: 25%;
 				float: right;
 				margin-left: 8px;
