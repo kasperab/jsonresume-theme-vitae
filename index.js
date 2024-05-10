@@ -15,6 +15,7 @@ function render(resume) {
 			title.push(resume.basics.label);
 			body.push("<h2>" + resume.basics.label + "</h2>");
 		}
+		body.push("<br>");
 		let contact = [];
 		if (resume.basics.phone) {
 			contact.push("<a href='tel:" + resume.basics.phone + "'>" + resume.basics.phone + "</a>");
@@ -54,15 +55,19 @@ function render(resume) {
 		body.push("<p>");
 		body.push("\t" + contact.join(" •\n\t\t\t"));
 		body.push("</p>");
+		body.push("<br>");
 		if (resume.basics.summary) {
 			description = resume.basics.summary;
 			body.push("<h3>Summary</h3>");
+			body.push("<br>");
 			body.push("<p>" + resume.basics.summary + "</p>");
+			body.push("<br>");
 		}
 	}
 
 	if (resume.work) {
 		body.push("<h3>Work Experience</h3>");
+		body.push("<br>");
 		for (let item of resume.work) {
 			let label = [];
 			if (item.position) {
@@ -89,11 +94,13 @@ function render(resume) {
 				}
 				body.push("</ul>");
 			}
+			body.push("<br>");
 		}
 	}
 
 	if (resume.volunteer) {
 		body.push("<h3>Volunteer Experience</h3>");
+		body.push("<br>");
 		for (let item of resume.volunteer) {
 			let label = [];
 			if (item.position) {
@@ -120,11 +127,13 @@ function render(resume) {
 				}
 				body.push("</ul>");
 			}
+			body.push("<br>");
 		}
 	}
 
 	if (resume.education) {
 		body.push("<h3>Education</h3>");
+		body.push("<br>");
 		for (let item of resume.education) {
 			let label = [];
 			if (item.area) {
@@ -158,11 +167,13 @@ function render(resume) {
 				}
 				body.push("</ul>");
 			}
+			body.push("<br>");
 		}
 	}
 
 	if (resume.awards) {
 		body.push("<h3>Awards</h3>");
+		body.push("<br>");
 		for (let item of resume.awards) {
 			let label = [];
 			if (item.title) {
@@ -180,11 +191,13 @@ function render(resume) {
 			if (item.summary) {
 				body.push("<p>" + item.summary + "</p>");
 			}
+			body.push("<br>");
 		}
 	}
 
 	if (resume.certificates) {
 		body.push("<h3>Certificates</h3>");
+		body.push("<br>");
 		for (let item of resume.certificates) {
 			let label = [];
 			if (item.name) {
@@ -203,11 +216,13 @@ function render(resume) {
 			body.push("<p>");
 			body.push("\t" + label.join(" •\n\t\t\t"));
 			body.push("</p>");
+			body.push("<br>");
 		}
 	}
 
 	if (resume.publications) {
 		body.push("<h3>Publications</h3>");
+		body.push("<br>");
 		for (let item of resume.publications) {
 			let label = [];
 			if (item.name) {
@@ -229,11 +244,13 @@ function render(resume) {
 			if (item.summary) {
 				body.push("<p>" + item.summary + "</p>");
 			}
+			body.push("<br>");
 		}
 	}
 
 	if (resume.skills) {
 		body.push("<h3>Skills</h3>");
+		body.push("<br>");
 		for (let item of resume.skills) {
 			let label = [];
 			if (item.name) {
@@ -254,11 +271,13 @@ function render(resume) {
 				body.push("\t" + keywords.join(" •\n\t\t\t"));
 				body.push("</p>");
 			}
+			body.push("<br>");
 		}
 	}
 
 	if (resume.languages) {
 		body.push("<h3>Languages</h3>");
+		body.push("<br>");
 		let languages = [];
 		for (let item of resume.languages) {
 			let language = [];
@@ -273,10 +292,12 @@ function render(resume) {
 		body.push("<p>");
 		body.push("\t" + languages.join(" •\n\t\t\t"));
 		body.push("</p>");
+		body.push("<br>");
 	}
 
 	if (resume.projects) {
 		body.push("<h3>Projects</h3>");
+		body.push("<br>");
 		for (let item of resume.projects) {
 			let label = [];
 			if (item.name) {
@@ -300,11 +321,13 @@ function render(resume) {
 				}
 				body.push("</ul>");
 			}
+			body.push("<br>");
 		}
 	}
 
 	if (resume.interests) {
 		body.push("<h3>Interests</h3>");
+		body.push("<br>");
 		for (let item of resume.interests) {
 			if (item.name) {
 				body.push("<p><b>" + item.name + "</b></p>");
@@ -318,11 +341,13 @@ function render(resume) {
 				body.push("\t" + keywords.join(" •\n\t\t\t"));
 				body.push("</p>");
 			}
+			body.push("<br>");
 		}
 	}
 
 	if (resume.references) {
 		body.push("<h3>References</h3>");
+		body.push("<br>");
 		for (let item of resume.references) {
 			if (item.name) {
 				body.push("<p><b>" + item.name + "</b></p>");
@@ -330,6 +355,7 @@ function render(resume) {
 			if (item.reference) {
 				body.push("<p>" + item.reference + "</p>");
 			}
+			body.push("<br>");
 		}
 	}
 
@@ -343,13 +369,69 @@ function getDates(item) {
 	return dates;
 }
 
-const base = String.raw`<!DOCTYPE html>
+const base = `<!DOCTYPE html>
 <html lang="en" dir="ltr">
 	<head>
 		<title>{title}</title>
 		<meta charset="utf-8">
 		<meta name="description" content="{description}">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			body {
+				max-width: 800px;
+				margin: auto;
+				padding: 16px;
+				font-family: Helvetica, sans-serif;
+				font-size: 16px;
+				color: #000000;
+				background-color: #ffffff;
+			}
+			h1 {
+				font-size: 32px;
+				font-weight: bold;
+				text-align: center;
+				text-decoration: none;
+				margin-bottom: 8px;
+			}
+			h2 {
+				font-size: 24px;
+				font-weight: bold;
+				text-align: center;
+				text-decoration: none;
+			}
+			h3 {
+				font-size: 24px;
+				font-weight: bold;
+				text-align: left;
+				text-decoration: none;
+			}
+			ul {
+				padding-left: 24px;
+			}
+			p, li {
+				font-weight: normal;
+				text-align: left;
+				text-decoration: none;
+				margin-bottom: 8px;
+			}
+			a {
+				color: inherit;
+				font-weight: inherit;
+				text-decoration: underline;
+				text-align: inherit;
+				white-space: nowrap;
+			}
+			img {
+				max-width: 25%;
+				float: right;
+				margin-left: 8px;
+				margin-bottom: 8px;
+			}
+		</style>
 	</head>
 	<body>
 		{body}
