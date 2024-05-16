@@ -489,6 +489,15 @@ const base = `<!DOCTYPE html>
 				height: 1em;
 				fill: #444444;
 			}
+			@media (prefers-color-scheme: dark) {
+				body {
+					color: #ffffff;
+					background-color: #222222;
+				}
+				svg {
+					fill: #ffffff;
+				}
+			}
 		</style>
 	</head>
 	<body>

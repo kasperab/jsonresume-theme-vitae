@@ -1,7 +1,7 @@
 {
   "name": "jsonresume-theme-vitae",
-  "version": "0.4.0",
-  "description": "Simple theme for JSON Resume",
+  "version": "1.0.0",
+  "description": "Simple theme for JSON Resume with support for light and dark mode",
   "author": "kasperab",
   "repository": {
     "type": "git",
