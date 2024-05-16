@@ -38,7 +38,8 @@ function render(resume) {
 				location.push(resume.basics.location.region);
 			}
 			if (resume.basics.location.countryCode) {
-				location.push(resume.basics.location.countryCode);
+				const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
+				location.push(regionNames.of(resume.basics.location.countryCode));
 			}
 			contact.push("<span>" + icons.location + "\n\t\t\t" + location.join(", ") + "</span>");
 		}
@@ -83,13 +84,13 @@ function render(resume) {
 		for (let item of resume.work) {
 			let label = [];
 			if (item.position) {
-				label.push("<b>" + item.position + "</b>");
+				label.push("<span><b>" + item.position + "</b></span>");
 			}
 			if (item.name) {
 				if (item.url) {
-					label.push("<a href='" + item.url + "'>" + item.name + "</a>");
+					label.push("<span><a href='" + item.url + "'>" + item.name + "</a></span>");
 				} else {
-					label.push(item.name);
+					label.push("<span>" + item.name + "</span>");
 				}
 			}
 			label.push(getDates(item));
@@ -116,13 +117,13 @@ function render(resume) {
 		for (let item of resume.volunteer) {
 			let label = [];
 			if (item.position) {
-				label.push("<b>" + item.position + "</b>");
+				label.push("<span><b>" + item.position + "</b></span>");
 			}
 			if (item.organization) {
 				if (item.url) {
-					label.push("<a href='" + item.url + "'>" + item.organization + "</a>");
+					label.push("<span><a href='" + item.url + "'>" + item.organization + "</a></span>");
 				} else {
-					label.push(item.organization);
+					label.push("<span>" + item.organization + "</span>");
 				}
 			}
 			label.push(getDates(item));
@@ -149,13 +150,13 @@ function render(resume) {
 		for (let item of resume.education) {
 			let label = [];
 			if (item.area) {
-				label.push("<b>" + item.area + "</b>");
+				label.push("<span><b>" + item.area + "</b></span>");
 			}
 			if (item.institution) {
 				if (item.url) {
-					label.push("<a href='" + item.url + "'>" + item.institution + "</a>");
+					label.push("<span><a href='" + item.url + "'>" + item.institution + "</a></span>");
 				} else {
-					label.push(item.institution);
+					label.push("<span>" + item.institution + "</span>");
 				}
 			}
 			label.push(getDates(item));
@@ -164,10 +165,10 @@ function render(resume) {
 			body.push("</p>");
 			let summary = [];
 			if (item.studyType) {
-				summary.push(item.studyType);
+				summary.push("<span>" + item.studyType + "</span>");
 			}
 			if (item.score) {
-				summary.push("Score: " + item.score);
+				summary.push("<span>Score: " + item.score + "</span>");
 			}
 			if (summary.length > 0) {
 				body.push("<p>" + summary.join(" • ") + "</p>");
@@ -189,13 +190,13 @@ function render(resume) {
 		for (let item of resume.awards) {
 			let label = [];
 			if (item.title) {
-				label.push("<b>" + item.title + "</b>");
+				label.push("<span><b>" + item.title + "</b></span>");
 			}
 			if (item.awarder) {
-				label.push(item.awarder);
+				label.push("<span>" + item.awarder + "</span>");
 			}
 			if (item.date) {
-				label.push(item.date);
+				label.push("<span>" + getDate(item.date) + "</span>");
 			}
 			if (label.length > 0) {
 				body.push("<p>" + label.join(" • ") + "</p>");
@@ -214,16 +215,16 @@ function render(resume) {
 			let label = [];
 			if (item.name) {
 				if (item.url) {
-					label.push("<b><a href='" + item.url + "'>" + item.name + "</a></b>");
+					label.push("<span><b><a href='" + item.url + "'>" + item.name + "</a></b></span>");
 				} else {
-					label.push("<b>" + item.name + "</b>");
+					label.push("<span><b>" + item.name + "</b></span>");
 				}
 			}
 			if (item.issuer) {
-				label.push(item.issuer);
+				label.push("<span>" + item.issuer + "</span>");
 			}
 			if (item.date) {
-				label.push(item.date);
+				label.push("<span>" + getDate(item.date) + "</span>");
 			}
 			body.push("<p>");
 			body.push("\t" + label.join(" •\n\t\t\t"));
@@ -239,16 +240,16 @@ function render(resume) {
 			let label = [];
 			if (item.name) {
 				if (item.url) {
-					label.push("<b><a href='" + item.url + "'>" + item.name + "</a></b>");
+					label.push("<span><b><a href='" + item.url + "'>" + item.name + "</a></b></span>");
 				} else {
-					label.push("<b>" + item.name + "</b>");
+					label.push("<span><b>" + item.name + "</b></span>");
 				}
 			}
 			if (item.publisher) {
-				label.push(item.publisher);
+				label.push("<span>" + item.publisher + "</span>");
 			}
 			if (item.releaseDate) {
-				label.push(item.releaseDate);
+				label.push("<span>" + getDate(item.releaseDate) + "</span>");
 			}
 			body.push("<p>");
 			body.push("\t" + label.join(" •\n\t\t\t"));
@@ -277,7 +278,7 @@ function render(resume) {
 			if (item.keywords) {
 				let keywords = [];
 				for (let keyword of item.keywords) {
-					keywords.push(keyword);
+					keywords.push("<span>" + keyword + "</span>");
 				}
 				body.push("<p>");
 				body.push("\t" + keywords.join(" •\n\t\t\t"));
@@ -299,7 +300,7 @@ function render(resume) {
 			if (item.fluency) {
 				language.push("(" + item.fluency + ")");
 			}
-			languages.push(language.join(" "));
+			languages.push("<span>" + language.join(" ") + "</span>");
 		}
 		body.push("<p>");
 		body.push("\t" + languages.join(" •\n\t\t\t"));
@@ -314,9 +315,9 @@ function render(resume) {
 			let label = [];
 			if (item.name) {
 				if (item.url) {
-					label.push("<b><a href='" + item.url + "'>" + item.name + "</a></b>");
+					label.push("<span><b><a href='" + item.url + "'>" + item.name + "</a></b></span>");
 				} else {
-					label.push("<b>" + item.name + "</b>");
+					label.push("<span><b>" + item.name + "</b></span>");
 				}
 			}
 			label.push(getDates(item));
@@ -347,7 +348,7 @@ function render(resume) {
 			if (item.keywords) {
 				let keywords = [];
 				for (let keyword of item.keywords) {
-					keywords.push(keyword);
+					keywords.push("<span>" + keyword + "</span>");
 				}
 				body.push("<p>");
 				body.push("\t" + keywords.join(" •\n\t\t\t"));
@@ -375,10 +376,46 @@ function render(resume) {
 }
 
 function getDates(item) {
-	let dates = item.startDate || "Unknown";
+	let dates = "<span>";
+	if (item.startDate) {
+		dates += getDate(item.startDate);
+	} else {
+		dates += "Unknown";
+	}
 	dates += " - ";
-	dates += item.endDate || "Present";
+	if (item.endDate) {
+		dates += getDate(item.endDate);
+	} else {
+		dates += "Present";
+	}
+	dates += "</span>";
 	return dates;
+}
+
+function getDate(dateString) {
+	let date = dateString.split("-");
+	if (date.length > 2) {
+		date[2] = parseInt(date[2]);
+	}
+	if (date.length > 1) {
+		switch (parseInt(date[1])) {
+			case 1: date[1] = "January"; break;
+			case 2: date[1] = "February"; break;
+			case 3: date[1] = "March"; break;
+			case 4: date[1] = "April"; break;
+			case 5: date[1] = "May"; break;
+			case 6: date[1] = "June"; break;
+			case 7: date[1] = "July"; break;
+			case 8: date[1] = "August"; break;
+			case 9: date[1] = "September"; break;
+			case 10: date[1] = "October"; break;
+			case 11: date[1] = "November"; break;
+			case 12: date[1] = "December"; break;
+			default: break;
+		}
+	}
+	date.reverse();
+	return date.join(" ");
 }
 
 const base = `<!DOCTYPE html>
