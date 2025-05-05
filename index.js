@@ -377,6 +377,11 @@ function render(resume) {
 
 function getDates(item) {
 	let dates = "<span>";
+	if (item.startDate && item.startDate === item.endDate) {
+		dates += getDate(item.startDate);
+		dates += "</span>";
+		return dates;
+	}
 	if (item.startDate) {
 		dates += getDate(item.startDate);
 	} else {
